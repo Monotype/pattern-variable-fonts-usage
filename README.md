@@ -1,3 +1,2 @@
-# pattern-variable-fonts-usage
-
-Demonstrates modern variable font usage and performance patterns.
+# pattern-variable-fonts-usage runnable scaffold
+Minimal runnable implementation placeholder.
