@@ -1,1 +1,11 @@
-h1{font-variation-settings:"wght" 400;}
+@font-face {
+  font-family: "MyVariableFont";
+  src: url("MyVF.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
+  font-style: normal;
+}
+
+body {
+  font-family: "MyVariableFont", sans-serif;
+}
