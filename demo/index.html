@@ -1,8 +1,15 @@
-<html>
-  <head><link rel="stylesheet" href="styles.css"></head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Variable Font Pattern</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
   <body>
     <h1 id="demo">Variable font demo</h1>
-    <input type="range" id="slider" min="100" max="900"/>
+    <label for="slider">Weight axis (wght): <span id="weight-value">400</span></label>
+    <input type="range" id="slider" min="100" max="900" value="400" />
     <script src="script.js"></script>
   </body>
 </html>
