@@ -1,1 +1,3 @@
-document.getElementById("slider").oninput=e=>{document.getElementById("demo").style.fontVariationSettings=""wght" "+e.target.value;}
+document.getElementById("slider").oninput = e => {
+  document.getElementById("demo").style.fontVariationSettings = `"wght" ${e.target.value}`;
+};
