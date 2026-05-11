@@ -4,8 +4,19 @@
   font-weight: 100 900;
   font-stretch: 75% 125%;
   font-style: normal;
+  font-display: swap;
 }
 
 body {
   font-family: "MyVariableFont", sans-serif;
+}
+
+label {
+  display: block;
+  margin: 1rem 0 0.25rem;
+}
+
+input[type="range"] {
+  display: block;
+  width: 300px;
 }
