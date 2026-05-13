@@ -8,4 +8,5 @@ slider.oninput = e => {
   // allowing precise axis control beyond the standard keyword values.
   demo.style.fontVariationSettings = `"wght" ${weight}`;
   weightValue.textContent = weight;
+  slider.setAttribute("aria-valuenow", weight);
 };

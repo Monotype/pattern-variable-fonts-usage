@@ -9,7 +9,17 @@
   <body>
     <h1 id="demo">Variable font demo</h1>
     <label for="slider">Weight axis (wght): <span id="weight-value">400</span></label>
-    <input type="range" id="slider" min="100" max="900" value="400" />
+    <input
+      type="range"
+      id="slider"
+      min="100"
+      max="900"
+      value="400"
+      aria-valuemin="100"
+      aria-valuemax="900"
+      aria-valuenow="400"
+      aria-label="Variable font weight axis"
+    />
     <script src="script.js"></script>
   </body>
 </html>

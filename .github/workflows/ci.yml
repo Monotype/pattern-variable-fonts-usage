@@ -8,7 +8,7 @@ on:
   pull_request:
 
 jobs:
-  lint:
+  validate-demo:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -20,9 +20,12 @@ jobs:
       - name: Check JS syntax
         run: node --check demo/script.js
 
-      - name: Assert variable font CSS range declaration
+      - name: Assert variable font CSS range declarations
         run: |
           grep -q 'font-weight: 100 900' demo/styles.css
+          grep -q 'font-stretch: 75% 125%' demo/styles.css
 
-      - name: Assert font-variation-settings usage
-        run: grep -q 'font-variation-settings' demo/script.js
+      - name: Assert runtime axis control (fontVariationSettings / wght)
+        run: |
+          grep -q 'fontVariationSettings' demo/script.js
+          grep -q '"wght"' demo/script.js
