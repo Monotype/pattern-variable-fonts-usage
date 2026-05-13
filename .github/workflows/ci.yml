@@ -21,7 +21,8 @@ jobs:
         run: node --check demo/script.js
 
       - name: Assert variable font CSS range declaration
-        run: grep -q 'font-weight: 100 900' demo/styles.css
+        run: |
+          grep -q 'font-weight: 100 900' demo/styles.css
 
       - name: Assert font-variation-settings usage
         run: grep -q 'font-variation-settings' demo/script.js
