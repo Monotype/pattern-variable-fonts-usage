@@ -15,5 +15,5 @@ This repository is a reference implementation pattern. Changes should remain min
 
 - Keep the demo minimal — it demonstrates the variable font pattern, not a production UI
 - The `@font-face` axis range declarations (`font-weight: 100 900`, `font-stretch: 75% 125%`) are intentional; do not reduce them to single values
-- Do not commit font files; the `.gitignore` exclusion of font extensions must remain intact
+- The **demo subset** font under `demo/` is intentional so the demo succeeds; do not add unrelated font binaries without legal review. The `.gitignore` rule for `*.woff2` still applies to **new** files unless explicitly whitelisted or force-added
 - If a canonical assertion changes in the reference repo, update this pattern to stay aligned
