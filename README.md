@@ -22,6 +22,7 @@ This pattern implements the following assertions from [reference-fonts-implement
 - `pc-008` — self-hosting web fonts requires a web font license; desktop licenses do not permit web delivery
 - `bd-001` — self-hosted fonts integrate into CI/CD pipelines as versioned static assets
 - `pc-010` — cross-origin font delivery requires CORS configuration; missing headers cause silent font blocking
+- `pc-012` — some Monotype web font licenses require a tracking script alongside self-hosted font files; this demo covers `@font-face` / static hosting only—add a separate script when your license mandates tracking
 
 ## Usage
 
