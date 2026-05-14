@@ -1,0 +1,31 @@
+# Check that the pattern stays intact.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Check JS syntax
+        run: node --check demo/script.js
+
+      - name: Assert variable font CSS range declarations
+        run: |
+          grep -q 'font-weight: 100 900' demo/styles.css
+          grep -q 'font-stretch: 75% 125%' demo/styles.css
+
+      - name: Assert runtime axis control (fontVariationSettings / wght)
+        run: |
+          grep -q 'fontVariationSettings' demo/script.js
+          grep -q '"wght"' demo/script.js
