@@ -22,6 +22,7 @@ This pattern implements the following assertions from [reference-fonts-implement
 - `pc-008` — self-hosting web fonts requires a web font license; desktop licenses do not permit web delivery
 - `bd-001` — self-hosted fonts integrate into CI/CD pipelines as versioned static assets
 - `pc-010` — cross-origin font delivery requires CORS configuration; missing headers cause silent font blocking
+- `pc-012` — some Monotype web font licenses require a tracking script alongside self-hosted font files; this demo covers `@font-face` / static hosting only—add a separate script when your license mandates tracking. For privacy-related scope, see the **Clarification** on [pc-012](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#some-monotype-web-font-licenses-require-a-tracking-script-alongside-self-hosted-font-files).
 
 ## Usage
 
@@ -41,7 +42,7 @@ When the page, stylesheet, and font are all served from the **same origin** (as 
 
 ## Font files
 
-This repository includes **`demo/MyVF.woff2`**, a heavily subsetted version of GothamVar Regular. It demonstrates self-hosting only; **redistribution rights for that file are not granted to you**—use fonts you are licensed to deploy. For your own project, replace the file and the `@font-face` src path in `demo/styles.css`. See `demo/placeholder.txt` for placement notes.
+This repository includes **`demo/MyVF.woff2`**, a heavily subsetted version of GothamVar Regular. That file is licensed only for limited testing per **LICENSE** (Monotype terms) and this README’s **License** section—not for regular website use or redistribution. For your own project, replace the file and the `@font-face` src path in `demo/styles.css`. See `demo/placeholder.txt` for placement notes.
 
 To commit a different binary despite `*.woff2` in `.gitignore`, use **`git add -f demo/YourFile.woff2`** once, or add a **`!demo/YourFile.woff2`** line after the `*.woff2` rule.
 
@@ -67,4 +68,4 @@ Use GitHub Discussions (Q&A category) for questions about this pattern.
 
 ## License
 
-Sample application **code** in this repository is licensed under the [MIT License](LICENSE). The **subset font file** in `demo/` is included **only** as a demonstration asset; it is **not** licensed to third parties for separate redistribution—use fonts you have rights to ship. Canonical assertion text in [reference-fonts-implementation](https://github.com/Monotype/reference-fonts-implementation) remains subject to that repository’s terms.
+Sample application code in this repository is licensed under the MIT License. The subset font file in demo/ is included only as a build/CI demonstration asset and licensed for limited testing purposes only; it is not licensed for regular use on websites or redistribution. Please refer to the LICENSE file in the repository for both licenses. Canonical assertion text in [reference-fonts-implementation](https://github.com/Monotype/reference-fonts-implementation) remains subject to that repository’s terms.
