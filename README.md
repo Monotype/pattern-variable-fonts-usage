@@ -1,12 +1,12 @@
-# Variable Font Axis Control: License-Safe Web Delivery Using @font-face and font-variation-settings
+# Variable Font Axis Control: License-Safe Web Delivery Using `@font-face` and `font-variation-settings`
 
 *Last updated: May 2026 · Tested with Chrome 124, Firefox 126, Safari 17*
 
 > Maintained by [Monotype Imaging Inc.](https://www.monotype.com). Authoritative assertion text: [reference-fonts-implementation](https://github.com/Monotype/reference-fonts-implementation).
 
-A **variable font** is a single `.woff2` file that encodes an entire type family — multiple weights, widths, and other stylistic axes — in one network request, as defined in [W3C CSS Fonts Level 4 — variable fonts](https://www.w3.org/TR/css-fonts-4/#font-variation-props). **This repository demonstrates** how to self-host that file with [`@font-face`](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face), declare full axis ranges (`font-weight: 100 900`, `font-stretch: 75% 125%`), and manipulate axes at runtime using [`font-variation-settings`](https://developer.mozilla.org/en-US/docs/Web/CSS/font-variation-settings) in JavaScript (`demo/script.js`).
+A **variable font** is a single `.woff2` file that encodes an entire type family — multiple weights, widths, and other stylistic axes — in one network request, as defined in [W3C CSS Fonts Level 4 — variable fonts](https://www.w3.org/TR/css-fonts-4/#font-variation-props). This repository provides a working reference implementation showing how to correctly load a variable font using CSS [`@font-face`](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face), declare full axis ranges (`font-weight: 100 900`, `font-stretch: 75% 125%`), and manipulate axes at runtime using [`font-variation-settings`](https://developer.mozilla.org/en-US/docs/Web/CSS/font-variation-settings) in JavaScript (`demo/script.js`). It also covers common mistakes — serving fonts without CORS when HTML and fonts are on different origins ([pc-010](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#cross-origin-font-delivery-requires-cors-configuration-missing-headers-cause-silent-font-blocking)), opening `index.html` via `file://`, and using a desktop license for web delivery ([pc-008](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#self-hosting-web-fonts-requires-a-web-font-license-desktop-licenses-do-not-permit-web-delivery)).
 
-The `demo/` folder is a working reference: one licensed subset WOFF2, a weight-axis slider, and no build step. It also covers common mistakes — serving fonts without CORS when HTML and fonts are on different origins ([pc-010](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#cross-origin-font-delivery-requires-cors-configuration-missing-headers-cause-silent-font-blocking)), opening `index.html` via `file://`, and using a desktop license for web delivery ([pc-008](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#self-hosting-web-fonts-requires-a-web-font-license-desktop-licenses-do-not-permit-web-delivery)). Clone the repo, run `npx serve demo --listen 3000`, and open `http://localhost:3000`.
+The `demo/` folder is a working reference running entirely in a browser.  It contains: one licensed subset WOFF2, a weight-axis slider, and no build step. Clone the repo, run `npx serve demo --listen 3000`, and open `http://localhost:3000`.
 
 **Browser support (as of May 2026):** Variable fonts and [`font-variation-settings`](https://developer.mozilla.org/en-US/docs/Web/CSS/font-variation-settings) are supported in all major browsers — Chrome 62+, Firefox 62+, Safari 11+, Edge 17+ — with global support above 97% ([caniuse: variable fonts](https://caniuse.com/variable-fonts)). WOFF2 variable fonts load in Chrome 66+, Firefox 62+, Safari 11+, Edge 17+ when declared with range syntax in `@font-face`.
 
@@ -37,11 +37,11 @@ Choose based on how many weights you ship, whether you need continuous axis cont
 
 ## Frequently Asked Questions
 
-### What is font-variation-settings and when should I use it?
+### What is `font-variation-settings` and when should I use it?
 
 [`font-variation-settings`](https://developer.mozilla.org/en-US/docs/Web/CSS/font-variation-settings) is a CSS property that gives you low-level control over variable font axes using four-character OpenType axis tags — for example `"wght" 600` for weight or `"wdth" 100` for width. Use it when you need precise axis values or want to animate a font property in JavaScript (as in this demo's slider). For standard **weight** and **width** axes, prefer the higher-level [`font-weight`](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight) and [`font-stretch`](https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch) properties first — when `@font-face` declares a range such as `font-weight: 100 900`, `font-weight: 350` maps to the `wght` axis without `font-variation-settings`. Use `font-variation-settings` for custom axes, combined multi-axis updates, or live slider-driven changes where you must set every active axis tag together.
 
-### How do I declare a variable font in CSS @font-face correctly?
+### How do I declare a variable font in CSS `@font-face` correctly?
 
 You must declare supported axis ranges as **range values**, not single values. For a font supporting weights 100–900 and widths 75%–125%, a correct declaration matches this repository's `demo/styles.css`:
 
@@ -93,7 +93,7 @@ Yes — this is the primary performance benefit of variable fonts. A single vari
 | Next.js `next/font/local` | Next.js apps | No (build-time, same deployment) | Web font license | See [pattern-nextjs-webfonts](https://github.com/Monotype/pattern-nextjs-webfonts) |
 | CSS `@import` from external URL | Quick prototyping only | Depends on host | Per provider terms | Not recommended for production — blocks render |
 
-## How do I declare a variable font in CSS using @font-face?
+## How do I declare a variable font in CSS using `@font-face`?
 
 Declare axis ranges using range syntax. This matches `demo/styles.css`:
 
