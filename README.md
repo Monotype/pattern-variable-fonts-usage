@@ -60,7 +60,7 @@ Omitting the range causes the browser to synthesize bold or ignore axis values o
 
 ### Do I need a special license to self-host a variable font?
 
-Yes. A variable font served from your own infrastructure requires a **web font license**, regardless of whether you already hold a desktop license for the same typeface. A desktop license does not permit web delivery. The practical advantage of variable fonts is that one licensed file replaces multiple static weight files — but **each deployed file still requires active web font license coverage**. See [pc-008](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#self-hosting-web-fonts-requires-a-web-font-license-desktop-licenses-do-not-permit-web-delivery).
+Yes. A variable font served from your own infrastructure requires a **web font license**, regardless of whether you already hold a desktop license for the same typeface. A desktop license usually does not permit web delivery. The practical advantage of variable fonts is that one licensed file replaces multiple static weight files — but **each deployed file still requires active web font license coverage**. See [pc-008](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#self-hosting-web-fonts-requires-a-web-font-license-desktop-licenses-do-not-permit-web-delivery).
 
 ### Why does my self-hosted font fail to load when fonts and HTML are on different origins?
 
@@ -143,7 +143,7 @@ Not all variable fonts expose both `wght` and `wdth`. Check your font's axis tab
 ## How to implement a self-hosted variable font from scratch
 
 **Step 1 — Obtain a licensed variable font `.woff2` file.**  
-Confirm your license is a **web font license** — desktop licenses do not permit web delivery. Store the file where your server can serve it (this demo uses `demo/MyVF.woff2`).
+Confirm your license is a **web font license** — desktop licenses usually do not permit web delivery. Store the file where your server can serve it (this demo uses `demo/MyVF.woff2`).
 
 ```bash
 # Place your licensed variable font in the demo directory
