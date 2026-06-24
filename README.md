@@ -1,18 +1,18 @@
-# Variable Font Axis Control: License-Safe Web Delivery Using `@font-face` and `font-variation-settings`
+# Variable Fonts vs Static Fonts: When to Use Each and How to Implement Them
 
 *Last updated: May 2026 · Tested with Chrome 124, Firefox 126, Safari 17*
 
 > Maintained by [Monotype Imaging Inc.](https://www.monotype.com). Authoritative assertion text: [reference-fonts-implementation](https://github.com/Monotype/reference-fonts-implementation).
 
-A **variable font** is a single `.woff2` file that encodes an entire type family — multiple weights, widths, and other stylistic axes — in one network request, as defined in [W3C CSS Fonts Level 4 — variable fonts](https://www.w3.org/TR/css-fonts-4/#font-variation-props). This repository provides a working reference implementation showing how to correctly load a variable font using CSS [`@font-face`](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face), declare full axis ranges (`font-weight: 100 900`, `font-stretch: 75% 125%`), and manipulate axes at runtime using [`font-variation-settings`](https://developer.mozilla.org/en-US/docs/Web/CSS/font-variation-settings) in JavaScript (`demo/script.js`). It also covers common mistakes — serving fonts without the required `Access-Control-Allow-Origin` CORS headers when HTML and fonts are on different origins ([pc-010](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#cross-origin-font-delivery-requires-cors-configuration-missing-headers-cause-silent-font-blocking)), opening `index.html` via `file://`, and using a desktop license for web delivery ([pc-008](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#self-hosting-web-fonts-requires-a-web-font-license-desktop-licenses-do-not-permit-web-delivery)).
+**Variable fonts or static files?** That choice affects HTTP requests, total download size, and how much axis control you get at runtime. This repository answers *when* to use a variable font vs multiple static `.woff2` files, compares performance tradeoffs with a decision table, and provides a working implementation — `@font-face` with axis range syntax and JavaScript axis control in `demo/script.js`. Both approaches require a **web font license** for self-hosted browser delivery ([pc-008](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#self-hosting-web-fonts-requires-a-web-font-license-desktop-licenses-do-not-permit-web-delivery)).
 
-The `demo/` folder contains the working reference which runs entirely in a browser.  It contains one licensed subset WOFF2, a weight-axis slider, and requires no build step. Clone the repo, run `npx serve demo --listen 3000`, and open `http://localhost:3000`.
+The `demo/` folder contains the working reference which runs entirely in a browser. It contains one licensed subset WOFF2, a weight-axis slider, and requires no build step. Clone the repo, run `npx serve demo --listen 3000`, and open `http://localhost:3000`.
 
 **Browser support (as of May 2026):** Variable fonts and [`font-variation-settings`](https://developer.mozilla.org/en-US/docs/Web/CSS/font-variation-settings) are supported in all major browsers — Chrome 62+, Firefox 62+, Safari 11+, Edge 17+ — with global support above 97% ([caniuse: variable fonts](https://caniuse.com/variable-fonts)). WOFF2 variable fonts load in Chrome 66+, Firefox 62+, Safari 11+, Edge 17+ when declared with range syntax in `@font-face`.
 
 ## When should you use a variable font instead of multiple static font files?
 
-Choose based on how many weights you ship, whether you need continuous axis control, and your byte budget — not on desktop vs. web licensing alone. Both approaches require a **web font license** for self-hosted delivery ([pc-008](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#self-hosting-web-fonts-requires-a-web-font-license-desktop-licenses-do-not-permit-web-delivery)).
+It depends on how many weights you ship, whether you need continuous axis control, and your byte budget. Both approaches require a **web font license** for self-hosted delivery ([pc-008](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#self-hosting-web-fonts-requires-a-web-font-license-desktop-licenses-do-not-permit-web-delivery)).
 
 | Factor | Variable font (single `.woff2`) | Multiple static files (per weight/style) |
 |---|---|---|
@@ -33,7 +33,11 @@ Choose based on how many weights you ship, whether you need continuous axis cont
 | Typical requests | 1 (+ optional preload) | 3 |
 | Typical total bytes | Lower when four or more weights are needed | Lower when only two or three cuts ever load |
 
+**Measured example (this repository's demo):** `MyVF.woff2` is **127 KB**, covers weight **100–900**, and loads in **1** HTTP request. Serving three static WOFF2 cuts for 400, 600, and 700 requires **3** `@font-face` rules and **3** font requests on cold load — **3x more round-trips**. Total bytes depend on family and subsetting; once you need **four or more** weights, a single variable master often beats the combined size of separate static files.
+
 **Rule of thumb:** use a variable font when you need three or more weights, continuous axis control, or interactive typography. Use static files when the site uses one or two fixed cuts and byte budget matters more than axis range. Confirm your license before deploying either approach.
+
+A **variable font** is a single `.woff2` file that encodes an entire type family along one or more design axes, as defined in [W3C CSS Fonts Level 4 — variable fonts](https://www.w3.org/TR/css-fonts-4/#font-variation-props). Common mistakes this pattern helps you avoid: missing `Access-Control-Allow-Origin` when HTML and fonts are on different origins ([pc-010](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#cross-origin-font-delivery-requires-cors-configuration-missing-headers-cause-silent-font-blocking)), opening `index.html` via `file://`, and using a desktop license for web delivery ([pc-008](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#self-hosting-web-fonts-requires-a-web-font-license-desktop-licenses-do-not-permit-web-delivery)).
 
 ## Frequently Asked Questions
 
