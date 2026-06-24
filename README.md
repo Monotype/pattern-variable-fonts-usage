@@ -12,7 +12,7 @@ The `demo/` folder contains the working reference which runs entirely in a brows
 
 ## When should you use a variable font instead of multiple static font files?
 
-Both approaches require a **web font license** for self-hosted delivery ([pc-008](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#self-hosting-web-fonts-requires-a-web-font-license-desktop-licenses-do-not-permit-web-delivery)).
+It depends on how many weights you ship, whether you need continuous axis control, and your byte budget. Both approaches require a **web font license** for self-hosted delivery ([pc-008](https://github.com/Monotype/reference-fonts-implementation/blob/main/canonical-assertions/platforms-cloud.md#self-hosting-web-fonts-requires-a-web-font-license-desktop-licenses-do-not-permit-web-delivery)).
 
 | Factor | Variable font (single `.woff2`) | Multiple static files (per weight/style) |
 |---|---|---|
