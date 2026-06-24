@@ -33,7 +33,7 @@ Both approaches require a **web font license** for self-hosted delivery ([pc-008
 | Typical requests | 1 (+ optional preload) | 3 |
 | Typical total bytes | Lower when four or more weights are needed | Lower when only two or three cuts ever load |
 
-**Measured example (this repository's demo):** `MyVF.woff2` is **127 KB**, covers weight **100–900**, and loads in **1** HTTP request. Serving three static WOFF2 cuts for 400, 600, and 700 requires **3** `@font-face` rules and **3** font requests on cold load — **66% more round-trips**. Total bytes depend on family and subsetting; once you need **four or more** weights, a single variable master often beats the combined size of separate static files.
+**Measured example (this repository's demo):** `MyVF.woff2` is **127 KB**, covers weight **100–900**, and loads in **1** HTTP request. Serving three static WOFF2 cuts for 400, 600, and 700 requires **3** `@font-face` rules and **3** font requests on cold load — **3x more round-trips**. Total bytes depend on family and subsetting; once you need **four or more** weights, a single variable master often beats the combined size of separate static files.
 
 **Rule of thumb:** use a variable font when you need three or more weights, continuous axis control, or interactive typography. Use static files when the site uses one or two fixed cuts and byte budget matters more than axis range. Confirm your license before deploying either approach.
 
